@@ -18,7 +18,7 @@ _nopass.exp :: Automates the process of switching user once on remote host**
 ```shell
 ./nopass.exp REQUIRED_REMOTE_HOSTNAME OPTIONAL_REMOTEHOST_USER OPTIONAL_REMOTE_COMMAND
 ```
-- PASSWORD: replace this variable with your remote host password
+- PASSWORD: replace this variable with your remote host password (hard coded in script)
 - REQUIRED_REMOTE_HOSTNAME: remote host name (required)
 - OPTIONAL_REMOTEHOST_USER: switch to this user once logged to remote VM (defaults to script running user)
 - OPTIONAL_REMOTE_COMMAND: executes command on remote VM as OPTIONAL_REMOTEHOST_USER
