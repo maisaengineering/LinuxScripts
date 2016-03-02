@@ -1,0 +1,39 @@
+#!/usr/bin/expect
+
+set timeout 30
+set src [lrange $argv 1 end]
+set username [lindex $argv 0]
+
+send_user "enter remote password!\n"
+set password [gets stdin]
+
+set pass [gets stdin]
+set password [expr {[string length $pass]>0 ? $password : "--"}]
+
+eval spawn /usr/bin/ssh -t -q -o StrictHostKeyChecking=no $username@$src
+
+expect {
+  "*?assword:*" {
+    send "$password\r"
+    send_user "entered password!\n"
+  }
+
+  "#" {
+    send_user "auto-logged. moving on..."
+  }
+}
+
+send_user "login success!\n"
+send "sudo -u fdrp -i\r"
+expect {
+  "*?$username:*" {
+    send "$password\r"
+    send_user "entered password!\n"
+  }
+
+  "#" {
+    send_user "auto-logged. moving on..."
+  }
+}
+send_user "sudo success!\n"
+interact
